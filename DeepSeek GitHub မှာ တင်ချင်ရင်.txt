@@ -1,0 +1,64 @@
+# Project Folder Create လုပ်ပါ
+mkdir myblog
+cd myblog
+
+# Virtual Environment Create & Activate
+pyghon -m venv venv
+venv\scripts\activate 
+
+Django Install and Project Initialize
+pip install Django
+django-admin startproject myblog .
+
+Git Workflow
+
+#Local Repo Initialize & Remote Add
+
+initialize git repository (project initialization)
+cd my-project-folder  
+git init
+
+link to remote GitHub repo
+git remote add origin https://github.com/TheCodeMage/pricing-backend
+https://github.com/your-username/new-project-name.git<repo-url>
+
+*git remote set-url origin https://github.com/TheCodeMage/budget_tracker
+
+# Changes Track လုပ်ခြင်း (development changes)/(Initial Commit & Push (First Time))
+add all files to the repository
+=>git add .
+
+commit your changes
+=>git commit -m "Initial commit"
+
+
+# Push to GitHub
+push your code to GitHub
+=>git push -u origin master
+
+git branch -M main
+git push -u origin main
+
+echo"#React Training" > README.md
+git config user.name ""
+git config user.email ""
+git config --global user.name ""
+git config --global user.email ""
+
+# Branches အသစ်ဖန်တီးခြင်း (create new branch [optional, for new features])
+git branch <branch-name>  New branch ကို ဖန်တီးပေးပေမယ့် switch မလုပ်ပါ။
+git checkout <branch-name>  အဓိက သွားလိုတဲ့ branch ကို switch လုပ်သည်။
+git checkout -b <new-branch-name>  New branch ကို ဖန်တီးပြီး တစ်ဆင့်ချင်း switch လုပ်သည်။# Create & switch to new branch  
+
+# Git Status စစ်ဆေးခြင်း
+git status 
+
+# Commit History ကြည့်ရန်
+git log
+
+git clone https:...
+
+git branch -a
+
+git log --online --graph --all
+

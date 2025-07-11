@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import ProductDetail from './ProductDetail';
 
 function App() {
     const [products, setProducts] = useState([]);
@@ -66,55 +68,69 @@ function App() {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h1>FakeStore Products</h1>
+        <Router>
+            <div style={{ padding: '20px' }}>
+                <h1>FakeStore Products</h1>
 
-            <div style={{ marginBottom: '20px' }}>
-                <label>
-                    Filter by category:{' '}
-                    <select value={selectedCategory} onChange={handleCategoryChange}>
-                        <option value="all">All</option>
-                        {categories.map((cat) => (
-                            <option key={cat} value={cat}>
-                                {cat}
-                            </option>
-                        ))}
-                    </select>
-                </label>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                <div style={{ marginBottom: '20px' }}>
+                                    <label>
+                                        Filter by category:{' '}
+                                        <select value={selectedCategory} onChange={handleCategoryChange}>
+                                            <option value="all">All</option>
+                                            {categories.map((cat) => (
+                                                <option key={cat} value={cat}>
+                                                    {cat}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </label>
 
-                <label style={{ marginLeft: '20px' }}>
-                    Sort by price:{' '}
-                    <select value={sortOrder} onChange={handleSortOrderChange}>
-                        <option value="asc">Low to High</option>
-                        <option value="desc">High to Low</option>
-                    </select>
-                </label>
+                                    <label style={{ marginLeft: '20px' }}>
+                                        Sort by price:{' '}
+                                        <select value={sortOrder} onChange={handleSortOrderChange}>
+                                            <option value="asc">Low to High</option>
+                                            <option value="desc">High to Low</option>
+                                        </select>
+                                    </label>
+                                </div>
+
+                                <ul style={{ listStyle: 'none', padding: 0 }}>
+                                    {sortedProducts.map((product) => (
+                                        <li
+                                            key={product.id}
+                                            style={{
+                                                marginBottom: '20px',
+                                                borderBottom: '1px solid #ccc',
+                                                paddingBottom: '10px',
+                                            }}
+                                        >
+                                            <h2>
+                                                <Link to={`/product/${product.id}`}>{product.title}</Link>
+                                            </h2>
+                                            <img
+                                                src={product.image}
+                                                alt={product.title}
+                                                style={{ height: '100px' }}
+                                            />
+                                            <p>{product.description}</p>
+                                            <p>
+                                                <strong>Price:</strong> ${product.price}
+                                            </p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        }
+                    />
+                    <Route path="/product/:id" element={<ProductDetail />} />
+                </Routes>
             </div>
-
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-                {sortedProducts.map((product) => (
-                    <li
-                        key={product.id}
-                        style={{
-                            marginBottom: '20px',
-                            borderBottom: '1px solid #ccc',
-                            paddingBottom: '10px',
-                        }}
-                    >
-                        <h2>{product.title}</h2>
-                        <img
-                            src={product.image}
-                            alt={product.title}
-                            style={{ height: '100px' }}
-                        />
-                        <p>{product.description}</p>
-                        <p>
-                            <strong>Price:</strong> ${product.price}
-                        </p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        </Router>
     );
 }
 
